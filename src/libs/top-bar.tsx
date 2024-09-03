@@ -4,6 +4,7 @@ import { grey } from "@mui/material/colors";
 
 const TopBarContainer = styled(Stack)`
   top: 0;
+  z-index: 99;
   position: sticky;
   padding-left: 24px;
   padding-right: 24px;
