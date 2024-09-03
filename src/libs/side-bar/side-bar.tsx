@@ -7,8 +7,9 @@ import {
 } from "./side-bar-item-group";
 import { grey } from "@mui/material/colors";
 
-const SideBarContainer = styled(Box)`
+const SideBarContainer = styled(Box)<{ width: number }>`
   position: fixed;
+  width: ${({ width }) => width};
   background-color: white;
   ${({ theme }) =>
     theme.applyStyles("dark", {
@@ -24,6 +25,7 @@ const SideBarContentContainer = styled(List)`
 `;
 
 export type SideBarProps = {
+  width: number;
   selectedKeys: string[];
   items: (SideBarItemSchema | SideBarItemGroupSchema)[];
   onItemSelected: (keys: string[]) => void;
@@ -55,38 +57,40 @@ export const SideBar = (props: SideBarProps) => {
   };
 
   return (
-    <SideBarContainer>
-      <SideBarContentContainer
-        sx={{
-          height: "calc(100vh - 70px)",
-          minWidth: 275,
-          padding: 1,
-        }}
-      >
-        {props.items.map((item) => {
-          if (item.type === "group") {
-            return (
-              <SideBarItemGroup
-                key={`${item.id}-group`}
-                {...item}
-                selected={isItemSelected(item.id)}
-                selectedKeys={props.selectedKeys}
-                onItemSelected={props.onItemSelected}
-                onClick={handleItemSelected(item.id, item.onClick)}
-              />
-            );
-          } else {
-            return (
-              <SideBarItem
-                key={`${item.id}-item`}
-                {...item}
-                selected={isItemSelected(item.id)}
-                onClick={handleItemSelected(item.id, item.onClick)}
-              />
-            );
-          }
-        })}
-      </SideBarContentContainer>
-    </SideBarContainer>
+    <Box width={props.width}>
+      <SideBarContainer width={props.width}>
+        <SideBarContentContainer
+          sx={{
+            height: "calc(100vh - 70px)",
+            width: props.width,
+            padding: 1,
+          }}
+        >
+          {props.items.map((item) => {
+            if (item.type === "group") {
+              return (
+                <SideBarItemGroup
+                  key={`${item.id}-group`}
+                  {...item}
+                  selected={isItemSelected(item.id)}
+                  selectedKeys={props.selectedKeys}
+                  onItemSelected={props.onItemSelected}
+                  onClick={handleItemSelected(item.id, item.onClick)}
+                />
+              );
+            } else {
+              return (
+                <SideBarItem
+                  key={`${item.id}-item`}
+                  {...item}
+                  selected={isItemSelected(item.id)}
+                  onClick={handleItemSelected(item.id, item.onClick)}
+                />
+              );
+            }
+          })}
+        </SideBarContentContainer>
+      </SideBarContainer>
+    </Box>
   );
 };
