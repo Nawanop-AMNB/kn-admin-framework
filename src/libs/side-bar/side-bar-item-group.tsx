@@ -42,7 +42,12 @@ export const SideBarItemGroup = (props: SideBarItemGroupProps) => {
       />
       <Collapse in={props.selected}>
         {props.subItems.map((item) => (
-          <Box paddingLeft={4} paddingTop={1} paddingRight={1}>
+          <Box
+            key={`${item.id}-item`}
+            paddingLeft={4}
+            paddingTop={1}
+            paddingRight={1}
+          >
             <SideBarItem
               {...item}
               selected={isItemSelected(item.id)}

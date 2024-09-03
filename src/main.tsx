@@ -1,15 +1,16 @@
-import { CssBaseline } from "@mui/material";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { AdminThemeProvider } from "./libs/admin-theme-provider";
 import { App } from "./app";
-import { globalStyles } from "./libs/global-style";
+import { AdminThemeProvider } from "./libs/admin-theme-provider";
+
+import '@fontsource/ibm-plex-sans-thai/400.css'
+import '@fontsource/ibm-plex-sans-thai/500.css'
+import '@fontsource/ibm-plex-sans-thai/600.css'
+import '@fontsource/ibm-plex-sans-thai/700.css'
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AdminThemeProvider>
-      <CssBaseline />
-      {globalStyles}
       <App />
     </AdminThemeProvider>
   </React.StrictMode>

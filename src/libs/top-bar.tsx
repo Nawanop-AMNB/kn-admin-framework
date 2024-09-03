@@ -21,10 +21,6 @@ export type TopBarProps = {};
 export const TopBar = (_: TopBarProps) => {
   const { colorScheme, setColorScheme } = useColorScheme();
 
-  if (!colorScheme) {
-    return null;
-  }
-
   const handleChangeScheme = () => {
     if (colorScheme === "dark") {
       setColorScheme("light");

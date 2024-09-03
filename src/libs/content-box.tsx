@@ -1,5 +1,5 @@
 import { Box, Typography, styled } from "@mui/material";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 
 const ContentContainer = styled(Box)`
   width: 100%;
@@ -10,6 +10,10 @@ const ContentContainer = styled(Box)`
 const ContentHeader = styled(Box)`
   width: 100%;
   height: 100%;
+  display: flex;
+  direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const ContentPaper = styled(Box)`
@@ -25,18 +29,24 @@ const ContentPaper = styled(Box)`
 
 export type ContentBoxProps = {
   label?: string;
+  action?: ReactNode;
 };
 export const ContentBox = (props: PropsWithChildren<ContentBoxProps>) => {
   return (
     <ContentContainer>
-      {props.label && (
-        <ContentHeader>
-          <Typography variant="h5" fontWeight={600}>
-            {props.label}
-          </Typography>
-          <ContentPaper>{props.children}</ContentPaper>{" "}
-        </ContentHeader>
+      {(props.label || props.action) && (
+        <>
+          <ContentHeader>
+            {props.label && (
+              <Typography variant="h5" fontWeight={600}>
+                {props.label}
+              </Typography>
+            )}
+            {props.action && props.action}
+          </ContentHeader>
+        </>
       )}
+      <ContentPaper>{props.children}</ContentPaper>
     </ContentContainer>
   );
 };

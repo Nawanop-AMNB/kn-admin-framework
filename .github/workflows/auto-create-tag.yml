@@ -1,0 +1,72 @@
+# This is a basic workflow that is manually triggered
+
+name: Auto Create Tag
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  push:
+    branches:
+      - main
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  bump_version:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout Branch
+        uses: actions/checkout@v4
+      - name: Setup Node Version 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Setup git user
+        run: |
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config user.name "$GITHUB_ACTOR"
+      - name: Setup required outputs
+        id: required-outputs
+        run: |
+          echo "latest_tag=v$VERSION" >> $GITHUB_OUTPUT
+          echo "git_repo=$GITHUB_REPOSITORY" >> $GITHUB_OUTPUT
+      - name: Bump version
+        run: |
+          # Convert GitHub commits array to JSON
+          commits_json='${{ toJson(github.event.commits) }}'
+          VERSION_TYPE=patch
+
+          # Check if any commit message contains #major
+          major_exists=$(echo "$commits_json" | jq -r '.[] | select(.message | contains("#major")) | .message')
+          # Check if any commit message contains #major
+          minor_exists=$(echo "$commits_json" | jq -r '.[] | select(.message | contains("#minor")) | .message')
+
+          if [ -n "$major_exists" ]
+          then
+            echo "Found #major in commit messages."
+            VERSION_TYPE=major
+          elif [ -n "$minor_exists" ]
+          then
+            echo "Found #minor in commit messages."
+            VERSION_TYPE=minor
+          else
+            echo "Not found keywords, use default 'patch'"
+          fi
+
+          npm version $VERSION_TYPE -m "Bump Version to %s"
+      - name: Push update version commit
+        run: git push --force-with-lease
+      - name: Create next tag
+        id: create-tag
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "next_tag=v$VERSION" >> $GITHUB_OUTPUT
+      - name: Create a new release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.create-tag.outputs.next_tag }}
+          name: ${{ steps.create-tag.outputs.next_tag }}
+          body: |
+            **Full Changelog**: https://github.com/${{ steps.required-outputs.outputs.git_repo }}/compare/${{ steps.required-outputs.outputs.latest_tag }}...${{ steps.create-tag.outputs.next_tag }}
+          draft: false
+          prerelease: false

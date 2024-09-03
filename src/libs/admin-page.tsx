@@ -1,8 +1,11 @@
 import { Container, Grid2 } from "@mui/material";
 import { useEffect, useMemo, useState } from "react";
-import { SideBar, useSideBar } from "./side-bar";
-import { SideBarItemSchema } from "./side-bar-item";
-import { SideBarItemGroupSchema } from "./side-bar-item-group";
+import {
+  SideBar,
+  SideBarItemGroupSchema,
+  SideBarItemSchema,
+  useSideBar,
+} from "./side-bar";
 import { TopBar } from "./top-bar";
 
 type WithAdminPageContent<
@@ -36,7 +39,20 @@ export const AdminPage = (props: AdminPageProps) => {
     return list;
   }, [props.contents]);
 
-  const sideBarListener = useSideBar({ defaultKeys: ["dashboard"] });
+  const defaultKeys = useMemo(() => {
+    const keys: string[] = [];
+    if (keyContentList[0] && keyContentList[0].keys?.[0]) {
+      keys.push(keyContentList[0].keys[0]);
+    }
+    if (keyContentList[1] && keyContentList[1].keys?.[1]) {
+      keys.push(keyContentList[1].keys[1]);
+    }
+    return keys;
+  }, [keyContentList[0]]);
+
+  const sideBarListener = useSideBar({
+    defaultKeys,
+  });
   const { selectedKeys } = sideBarListener;
   const [Element, setElement] = useState<JSX.Element>();
 

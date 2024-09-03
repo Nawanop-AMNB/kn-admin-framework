@@ -1,11 +1,10 @@
 import {
-  ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
+  ListItemText
 } from "@mui/material";
-import { SideBarItemBaseSchema } from "./side-bar-item-base";
 import { ReactNode } from "react";
+import { SideBarItemBaseSchema } from "./side-bar-item-base";
 
 export type SideBarItemSchema = {
   type: "item";

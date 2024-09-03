@@ -81,6 +81,7 @@ export const SideBar = (props: SideBarProps) => {
           if (item.type === "group") {
             return (
               <SideBarItemGroup
+                key={`${item.id}-group`}
                 {...item}
                 selected={isItemSelected(item.id)}
                 selectedKeys={props.selectedKeys}
@@ -91,6 +92,7 @@ export const SideBar = (props: SideBarProps) => {
           } else {
             return (
               <SideBarItem
+                key={`${item.id}-item`}
                 {...item}
                 selected={isItemSelected(item.id)}
                 onClick={handleItemSelected(item.id, item.onClick)}

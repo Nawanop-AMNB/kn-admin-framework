@@ -1,13 +1,11 @@
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import { ThemeProviderProps } from "@mui/material/styles/ThemeProvider";
 import merge from "lodash.merge";
 import { useMemo } from "react";
 import theme from "../theme";
 
-import "@fontsource/ibm-plex-sans-thai/400.css";
-import "@fontsource/ibm-plex-sans-thai/500.css";
-import "@fontsource/ibm-plex-sans-thai/600.css";
-import "@fontsource/ibm-plex-sans-thai/700.css";
+import { globalStyles } from "./global-style";
+import { CssBaseline } from "@mui/material";
 
 export const AdminThemeProvider = (props: Partial<ThemeProviderProps>) => {
   const mergedTheme = useMemo(() => {
@@ -22,8 +20,11 @@ export const AdminThemeProvider = (props: Partial<ThemeProviderProps>) => {
       `AdminThemeProvider 'theme' property supports only object type`
     );
   }, [props.theme]);
+
   return (
     <ThemeProvider {...props} theme={mergedTheme}>
+      <CssBaseline />
+      {globalStyles}
       {props.children}
     </ThemeProvider>
   );
