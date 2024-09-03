@@ -16,11 +16,6 @@ const SideBarContainer = styled(Box)`
     })};
 `;
 
-const SideBarHeaderContainer = styled(Stack)`
-  border-right-width: 1px;
-  border-bottom-width: 1px;
-`;
-
 const SideBarContentContainer = styled(List)`
   height: calc(100vh - 70px);
   min-width: 275;
@@ -61,14 +56,6 @@ export const SideBar = (props: SideBarProps) => {
 
   return (
     <SideBarContainer>
-      <SideBarHeaderContainer
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        minHeight={70}
-      >
-        Logo
-      </SideBarHeaderContainer>
       <SideBarContentContainer
         sx={{
           height: "calc(100vh - 70px)",
