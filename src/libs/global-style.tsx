@@ -12,8 +12,9 @@ export const globalStyles = (
       body: {
         transition: "all 300ms linear",
         transitionProperty: "background-color, color, fill",
-        ...theme.applyStyles("light", {
-          backgroundColor: theme.palette.grey[200],
+        backgroundColor: theme.palette.grey[200],
+        ...theme.applyStyles("dark", {
+          backgroundColor: theme.palette.background.default,
         }),
       },
     })}
