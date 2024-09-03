@@ -72,14 +72,12 @@ export const AdminPage = (props: AdminPageProps) => {
 
   return (
     <Container maxWidth={false}>
-      <Grid2 container>
-        <Grid2 flexBasis={275}>
-          <SideBar items={props.contents} {...sideBarListener} />
+      <TopBar />
+      <Grid2 container height="100%">
+        <Grid2>
+          <SideBar width={275} items={props.contents} {...sideBarListener} />
         </Grid2>
-        <Grid2 flex={1}>
-          <TopBar />
-          {Element}
-        </Grid2>
+        <Grid2 flex={1}>{Element}</Grid2>
       </Grid2>
     </Container>
   );
