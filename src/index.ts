@@ -18,4 +18,5 @@ export * from "./libs/table";
 export * from "./libs/text-input";
 export * from "./libs/top-bar";
 export * from "./libs/use-menu";
+export * from "./libs/with-popover";
 export { type GridColDef } from "@mui/x-data-grid";
