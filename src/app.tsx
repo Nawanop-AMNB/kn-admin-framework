@@ -4,8 +4,6 @@ import {
   Spellcheck,
 } from "@mui/icons-material";
 import { AdminPage } from "./libs/admin-page";
-import { ContentBox } from "./libs/content-box";
-import { Table } from "./libs/table";
 import { ProductContent } from "./modules/product-content";
 
 export const App = () => {

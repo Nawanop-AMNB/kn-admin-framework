@@ -1,14 +1,13 @@
 import { Add } from "@mui/icons-material";
-import { Button } from "@mui/material";
-import { GridColDef } from "@mui/x-data-grid";
-import { useMemo } from "react";
+import { Button, List, ListItemButton } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { ContentBox } from "../libs/content-box";
+import DropzoneInput from "../libs/dropzone-input";
 import { EditorInput } from "../libs/editor-input/editor-input";
 import { FormModal, useFormModal } from "../libs/form-modal";
 import { SelectInput } from "../libs/select-input";
 import { TextInput } from "../libs/text-input";
-import DropzoneInput from "../libs/dropzone-input";
+import { WithPopover } from "../libs/with-popover";
 
 export const ProductContent = () => {
   const { open, handleClickOpen, handleClickClose } = useFormModal();
@@ -42,6 +41,16 @@ export const ProductContent = () => {
         control={control}
         name="file"
         accept={["image/png", "image/jpeg"]}
+      />
+      <WithPopover
+        render={({ onOpen }) => <Button onClick={onOpen}>Click Me</Button>}
+        element={({ onClose }) => (
+          <List>
+            <ListItemButton onClick={onClose}>
+              <>this is good!</>
+            </ListItemButton>
+          </List>
+        )}
       />
       <FormModal
         open={open}
