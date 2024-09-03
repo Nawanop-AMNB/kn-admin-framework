@@ -17,9 +17,10 @@ const ContentHeader = styled(Box)`
 `;
 
 const ContentPaper = styled(Box)`
-  ${({ theme }) =>
-    theme.applyStyles("dark", { backgroundColor: theme.palette.grey[900] })}
-  ${({ theme }) => theme.applyStyles("light", { backgroundColor: "white" })}
+  ${({ theme }) => ({
+    backgroundColor: "white",
+    ...theme.applyStyles("dark", { backgroundColor: theme.palette.grey[900] }),
+  })}
   width: 100%;
   height: 100%;
   margin-top: 16px;
