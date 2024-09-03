@@ -13,7 +13,6 @@ const SideBarContainer = styled(Box)`
   ${({ theme }) =>
     theme.applyStyles("dark", {
       backgroundColor: grey[900],
-      transitionDuration: "300ms",
     })};
 `;
 

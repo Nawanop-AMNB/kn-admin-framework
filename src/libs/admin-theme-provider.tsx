@@ -4,8 +4,9 @@ import merge from "lodash.merge";
 import { useMemo } from "react";
 import theme from "../theme";
 
-import { globalStyles } from "./global-style";
 import { CssBaseline } from "@mui/material";
+import { globalStyles } from "./global-style";
+import { Viewport } from "./view-port";
 
 export const AdminThemeProvider = (props: Partial<ThemeProviderProps>) => {
   const mergedTheme = useMemo(() => {
@@ -23,9 +24,9 @@ export const AdminThemeProvider = (props: Partial<ThemeProviderProps>) => {
 
   return (
     <ThemeProvider {...props} theme={mergedTheme}>
-      <CssBaseline />
+      <CssBaseline enableColorScheme />
       {globalStyles}
-      {props.children}
+      <Viewport>{props.children}</Viewport>
     </ThemeProvider>
   );
 };

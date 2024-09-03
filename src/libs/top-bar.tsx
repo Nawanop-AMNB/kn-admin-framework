@@ -12,7 +12,6 @@ const TopBarContainer = styled(Stack)`
   ${({ theme }) =>
     theme.applyStyles("dark", {
       backgroundColor: grey[900],
-      transitionDuration: "300ms",
     })};
 `;
 
