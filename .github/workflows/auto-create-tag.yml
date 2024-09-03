@@ -55,7 +55,7 @@ jobs:
 
           npm version $VERSION_TYPE -m "Bump Version to %s"
       - name: Push update version commit
-        run: git push --force-with-lease
+        run: git push
       - name: Create next tag
         id: create-tag
         run: |
