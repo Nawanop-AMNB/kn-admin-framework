@@ -26,7 +26,6 @@ export const TopBar = (_: TopBarProps) => {
       setColorScheme("light");
     }
     if (colorScheme === "light") {
-      console.log("pass!");
       setColorScheme("dark");
     }
   };
