@@ -1,13 +1,10 @@
-import { Box, styled } from "@mui/material";
+import { Box, darken, styled } from "@mui/material";
 
 export const Viewport = styled(Box)`
-  background-color: white;
   ${({ theme }) => ({
-    ...theme.applyStyles("light", {
-      backgroundColor: theme.palette.grey[200],
-    }),
+    backgroundColor: theme.palette.grey[200],
     ...theme.applyStyles("dark", {
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: darken(theme.palette.grey[900], 0.3),
     }),
   })}
   height: 100vh;
